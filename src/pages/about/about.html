@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Game
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <timer [progress]="loadProgress"></timer>
+  <ion-item>Score: {{score}}</ion-item>
+  <button (click)="startGame()" ion-button solid>Start</button>
+  <ion-item *ngFor="let i of count">
+    {{i}}
+  </ion-item>
+  <keypad [onUpdate]="onUpdateBound" [onClean]="onCleanKeypad" [style.visibility]="showKeypad ? 'visible' : 'hidden'"></keypad>
+</ion-content>

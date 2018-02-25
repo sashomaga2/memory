@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Settings</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="settingsForm" (ngSubmit)="onSubmit(settingsForm.value)">
+    <ion-item>
+      <ion-label floating>Number of boxes</ion-label>
+      <ion-input formControlName="count" type="number" value="4"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Time limit</ion-label>
+      <ion-input formControlName="timeLimit" type="number" value="10"></ion-input>
+    </ion-item>
+
+    <button ion-button full color="primary" [disabled]="!settingsForm.valid" style="margin-top: 20px;" type="submit">Save</button>
+  </form>
+</ion-content>

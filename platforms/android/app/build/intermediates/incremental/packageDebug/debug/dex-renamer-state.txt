@@ -1,4 +1,0 @@
-#Sun Feb 25 22:24:15 EET 2018
-base.0=D\:\\ionic\\memory\\memory\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
-renamed.0=classes.dex
-file.0=D\:\\ionic\\memory\\memory\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0\\classes.dex

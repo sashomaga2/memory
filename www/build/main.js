@@ -427,7 +427,7 @@ var KeypadComponent = (function () {
     ], KeypadComponent.prototype, "onClean", void 0);
     KeypadComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'keypad',template:/*ion-inline-start:"D:\ionic\memory\memory\src\components\keypad\keypad.html"*/'<div>\n  <ion-toolbar>\n    <ion-title> &nbsp;{{value}}</ion-title>\n    <ion-buttons class="btn-row">\n      <button (click)="onKeyTap(\'1\')" class="btn" ion-button solid>1</button>\n      <button (click)="onKeyTap(\'2\')" class="btn" ion-button solid>2</button>\n      <button (click)="onKeyTap(\'3\')" class="btn" ion-button solid>3</button>\n      <button (click)="onKeyTap(\'E\')" class="btn" ion-button solid>E</button>\n    </ion-buttons>\n    <ion-buttons class="btn-row">\n      <button (click)="onKeyTap(\'4\')" class="btn" ion-button solid>4</button>\n      <button (click)="onKeyTap(\'5\')" class="btn" ion-button solid>5</button>\n      <button (click)="onKeyTap(\'6\')" class="btn" ion-button solid>6</button>\n      <button (click)="onKeyTap(\'C\')" class="btn" ion-button solid>C</button>\n    </ion-buttons>\n    <ion-buttons class="btn-row">\n      <button (click)="onKeyTap(\'7\')" class="btn" ion-button solid>7</button>\n      <button (click)="onKeyTap(\'8\')" class="btn" ion-button solid>8</button>\n      <button (click)="onKeyTap(\'9\')" class="btn" ion-button solid>9</button>\n      <button (click)="onKeyTap(\'0\')" class="btn" ion-button solid>0</button>\n    </ion-buttons>\n  </ion-toolbar>\n</div>\n'/*ion-inline-end:"D:\ionic\memory\memory\src\components\keypad\keypad.html"*/
+            selector: 'keypad',template:/*ion-inline-start:"D:\ionic\memory\memory\src\components\keypad\keypad.html"*/'\n  <ion-toolbar style="padding: 1.2rem">\n    <ion-title> &nbsp;{{value}}</ion-title>\n    <ion-buttons class="btn-row">\n      <button (click)="onKeyTap(\'1\')" class="btn" ion-button solid>1</button>\n      <button (click)="onKeyTap(\'2\')" class="btn" ion-button solid>2</button>\n      <button (click)="onKeyTap(\'3\')" class="btn" ion-button solid>3</button>\n      <button (click)="onKeyTap(\'E\')" class="btn" ion-button solid>E</button>\n    </ion-buttons>\n    <ion-buttons class="btn-row">\n      <button (click)="onKeyTap(\'4\')" class="btn" ion-button solid>4</button>\n      <button (click)="onKeyTap(\'5\')" class="btn" ion-button solid>5</button>\n      <button (click)="onKeyTap(\'6\')" class="btn" ion-button solid>6</button>\n      <button (click)="onKeyTap(\'C\')" class="btn" ion-button solid>C</button>\n    </ion-buttons>\n    <ion-buttons class="btn-row">\n      <button (click)="onKeyTap(\'7\')" class="btn" ion-button solid>7</button>\n      <button (click)="onKeyTap(\'8\')" class="btn" ion-button solid>8</button>\n      <button (click)="onKeyTap(\'9\')" class="btn" ion-button solid>9</button>\n      <button (click)="onKeyTap(\'0\')" class="btn" ion-button solid>0</button>\n    </ion-buttons>\n  </ion-toolbar>\n\n'/*ion-inline-end:"D:\ionic\memory\memory\src\components\keypad\keypad.html"*/
         }),
         __metadata("design:paramtypes", [])
     ], KeypadComponent);
@@ -469,14 +469,13 @@ var AboutPage = (function () {
         this.score = 0;
         this.index = 0;
         this.showKeypad = false;
-        this.limit = parseInt(navParams.data.timeLimit);
-        this.navParamsCount = navParams.data.count;
-        this.generateInitialValues();
+        this.timeLimit = parseInt(navParams.data.timeLimit);
+        this.generateInitialValues(parseInt(navParams.data.count));
     }
-    AboutPage.prototype.generateInitialValues = function () {
+    AboutPage.prototype.generateInitialValues = function (boxCount) {
         var _this = this;
         var difficulty = 20;
-        this.count = Array(parseInt(this.navParamsCount)).fill(1).map(function () { return _this.generateRandomNumber(difficulty); });
+        this.viewData = Array(boxCount).fill(1).map(function () { return _this.generateRandomNumber(difficulty); });
     };
     AboutPage.prototype.ngOnInit = function () {
         this.onUpdateBound = this.onUpdate.bind(this);
@@ -486,13 +485,11 @@ var AboutPage = (function () {
         return Math.floor(Math.random() * to) + from;
     };
     AboutPage.prototype.onUpdate = function (val) {
-        console.log("called from main", val);
-        console.log(this.data[this.index]);
         if (val === '') {
-            this.closeGame();
+            this.endGame();
         }
         if (parseInt(val) === this.data[this.index]) {
-            this.count[this.index] = "OK";
+            this.viewData[this.index] = "OK";
             this.index++;
             if (this.index >= this.data.length) {
                 this.index = 0;
@@ -520,38 +517,44 @@ var AboutPage = (function () {
     AboutPage.prototype.startGameRound = function () {
         var difficulty = 5;
         var num = this.generateRandomNumber(difficulty);
-        this.count[this.index] = '+ ' + num;
+        var sign = this.generateRandomNumber(2, 1);
+        if (this.data[this.index] <= 5) {
+            sign = 2;
+        }
+        if (sign === 1) {
+            num = num * -1;
+        }
+        this.viewData[this.index] = (sign === 1 ? '' : '+') + num;
         this.data[this.index] += num;
         console.log('startGameRound', this.data);
         this.startTimer();
     };
     AboutPage.prototype.hideBoxValues = function () {
-        this.data = [].concat(this.count);
-        console.log("hideBoxValues", this.data);
-        this.count.fill(null);
+        this.data = [].concat(this.viewData);
+        this.viewData.fill(null);
     };
-    AboutPage.prototype.gameOver = function () {
+    AboutPage.prototype.endGame = function () {
         this.cleanKeypad();
-        this.count = this.data;
-        this.count[this.index] = "Game over! Should be: " + this.data[this.index];
+        clearInterval(this.timerInterval);
+        this.viewData = this.data;
+        this.viewData[this.index] = "Game over! Should be: " + this.data[this.index];
     };
     AboutPage.prototype.startTimer = function () {
         var _this = this;
         clearInterval(this.timerInterval);
-        this.loadProgress = 0;
-        var self = this;
+        this.timeProgress = 0;
         this.timerInterval = setInterval(function () {
-            _this.loadProgress += 1;
-            console.log("pr", _this.loadProgress);
-            if (_this.loadProgress >= 100) {
+            _this.timeProgress += 1;
+            //console.log("pr", this.timeProgress);
+            if (_this.timeProgress >= 100) {
                 clearInterval(_this.timerInterval);
-                _this.gameOver();
+                _this.endGame();
             }
-        }, 10 * this.limit);
+        }, 10 * this.timeLimit);
     };
     AboutPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-about',template:/*ion-inline-start:"D:\ionic\memory\memory\src\pages\about\about.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Game\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <timer [progress]="loadProgress"></timer>\n  <ion-item>Score: {{score}}</ion-item>\n  <button (click)="startGame()" ion-button solid>Start</button>\n  <ion-item *ngFor="let i of count">\n    {{i}}\n  </ion-item>\n  <keypad [onUpdate]="onUpdateBound" [onClean]="onCleanKeypad" [style.visibility]="showKeypad ? \'visible\' : \'hidden\'"></keypad>\n</ion-content>\n'/*ion-inline-end:"D:\ionic\memory\memory\src\pages\about\about.html"*/
+            selector: 'page-about',template:/*ion-inline-start:"D:\ionic\memory\memory\src\pages\about\about.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Game\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <timer [progress]="timeProgress"></timer>\n  <ion-item>Score: {{score}}</ion-item>\n  <ion-toolbar>\n    <button start (click)="startGame()" [style.visibility]="showKeypad ? \'hidden\' : \'visible\'" ion-button solid>Start</button>\n    <button end (click)="closeGame()" [style.visibility]="showKeypad ? \'visible\' : \'hidden\'" ion-button solid>Close</button>\n  </ion-toolbar>\n  <ion-item *ngFor="let i of viewData">\n    {{i}}\n  </ion-item>\n  <keypad [onUpdate]="onUpdateBound" [onClean]="onCleanKeypad" [style.visibility]="showKeypad ? \'visible\' : \'hidden\'"></keypad>\n</ion-content>\n'/*ion-inline-end:"D:\ionic\memory\memory\src\pages\about\about.html"*/
             /*directives: [TimerComponent]*/ // Directives was REMOVED !!!
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavParams */]])

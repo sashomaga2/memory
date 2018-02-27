@@ -11,26 +11,24 @@ import { SettingsPage } from '../settings/settings';
 })
 export class AboutPage {
   onCleanKeypad: Subject<any> = new Subject<any>();
-  timerInterval;
-  loadProgress;
-  count : any [];
-  navParamsCount;
+  timerInterval : number;
+  timeProgress : number;
+  viewData : any [];
   data : number [];
-  limit;
+  timeLimit : number;
   score: number = 0;
   index: number = 0;
   showKeypad: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.limit = parseInt(navParams.data.timeLimit);
-    this.navParamsCount = navParams.data.count;
+    this.timeLimit = parseInt(navParams.data.timeLimit);
 
-    this.generateInitialValues();
+    this.generateInitialValues(parseInt(navParams.data.count));
   }
 
-  generateInitialValues() {
+  generateInitialValues(boxCount: number) : void {
     const difficulty = 20;
-    this.count = Array(parseInt(this.navParamsCount)).fill(1).map(() => this.generateRandomNumber(difficulty));
+    this.viewData = Array(boxCount).fill(1).map(() => this.generateRandomNumber(difficulty));
   }
 
   /* Pass function to keypad */
@@ -45,15 +43,12 @@ export class AboutPage {
   }
 
   onUpdate(val: string) : void{
-    console.log("called from main", val);
-    console.log(this.data[this.index]);
-
     if(val === '') {
-      this.closeGame();
+      this.endGame();
     }
 
     if(parseInt(val) === this.data[this.index]) {
-      this.count[this.index] = "OK";
+      this.viewData[this.index] = "OK";
       this.index ++;
       if(this.index >= this.data.length) {
         this.index = 0;
@@ -84,38 +79,47 @@ export class AboutPage {
 
   startGameRound() {
     const difficulty = 5;
-    const num = this.generateRandomNumber(difficulty);
-    this.count[this.index] = '+ ' + num;
+    let num = this.generateRandomNumber(difficulty);
+    let sign = this.generateRandomNumber(2,1);
+
+    if(this.data[this.index] <= 5) {
+      sign = 2;
+    }
+    if(sign === 1) {
+      num = num * -1;
+    }
+
+    this.viewData[this.index] = (sign === 1 ? '' : '+') + num;
     this.data[this.index] += num;
     console.log('startGameRound', this.data);
     this.startTimer();
   }
 
   hideBoxValues(): void {
-    this.data = [].concat(this.count);
-    console.log("hideBoxValues", this.data);
-    this.count.fill(null);
+    this.data = [].concat(this.viewData);
+    this.viewData.fill(null);
   }
 
-  gameOver() : void {
+  endGame() : void {
     this.cleanKeypad();
-    this.count = this.data;
-    this.count[this.index] = `Game over! Should be: ${this.data[this.index]}`;
+    clearInterval(this.timerInterval);
+    this.viewData = this.data;
+    this.viewData[this.index] = `Game over! Should be: ${this.data[this.index]}`;
   }
 
   startTimer(): void {
     clearInterval(this.timerInterval);
-    this.loadProgress = 0;
-    var self = this;
+    this.timeProgress = 0;
+
     this.timerInterval = setInterval(() => {
-      this.loadProgress += 1;
-      console.log("pr", this.loadProgress);
-      if(this.loadProgress >= 100){
+      this.timeProgress += 1;
+      //console.log("pr", this.timeProgress);
+      if(this.timeProgress >= 100){
         clearInterval(this.timerInterval);
-        this.gameOver();
+        this.endGame();
       }
 
-    },10*this.limit);
+    },10*this.timeLimit);
   }
 
 

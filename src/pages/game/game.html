@@ -7,14 +7,14 @@
 </ion-header>
 
 <ion-content padding>
-  <timer [progress]="timeProgress"></timer>
+  <timer></timer>
   <ion-item>Score: {{score}}</ion-item>
   <ion-toolbar>
-    <button start (click)="startGame()" [style.visibility]="showKeypad ? 'hidden' : 'visible'" ion-button solid>Start</button>
-    <button end (click)="closeGame()" [style.visibility]="showKeypad ? 'visible' : 'hidden'" ion-button solid>Close</button>
+    <button *ngIf="!showKeypad; else elseBlock" start (click)="startGame()" ion-button solid>Start</button>
+    <ng-template #elseBlock><button end (click)="closeGame()" ion-button solid>Close</button></ng-template>
   </ion-toolbar>
-  <ion-item *ngFor="let i of viewData">
-    {{i}}
-  </ion-item>
+  <ion-list>
+    <box *ngFor="let box of boxData" [box]="box"></box>
+  </ion-list>
   <keypad [onUpdate]="onUpdateBound" [onClean]="onCleanKeypad" [style.visibility]="showKeypad ? 'visible' : 'hidden'"></keypad>
 </ion-content>

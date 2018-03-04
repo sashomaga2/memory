@@ -1,34 +1,37 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { NavController, NavParams } from 'ionic-angular';
 import { TimerComponent } from '../../components/timer/timer'
 import { SettingsPage } from '../settings/settings';
+import { IBox, BoxState } from '../../components/box/box';
+import { TimerService } from '../../services/timerService';
 
 @Component({
-  selector: 'page-about',
-  templateUrl: 'about.html'
+  selector: 'page-game',
+  templateUrl: 'game.html',
+  providers: [TimerService]
   /*directives: [TimerComponent]*/ // Directives was REMOVED !!!
 })
-export class AboutPage {
+export class GamePage implements OnInit {
   onCleanKeypad: Subject<any> = new Subject<any>();
-  timerInterval : number;
-  timeProgress : number;
-  viewData : any [];
-  data : number [];
-  timeLimit : number;
+  boxData : IBox [];
   score: number = 0;
   index: number = 0;
   showKeypad: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.timeLimit = parseInt(navParams.data.timeLimit);
-
+  constructor(public navCtrl: NavController, public navParams: NavParams, private timerService: TimerService) {
     this.generateInitialValues(parseInt(navParams.data.count));
+    // timer service
+    this.timerService.init(parseInt(navParams.data.secondsLimit));
+    this.timerService.end$.subscribe(
+      () => this.endGame()
+    )
   }
 
   generateInitialValues(boxCount: number) : void {
     const difficulty = 20;
-    this.viewData = Array(boxCount).fill(1).map(() => this.generateRandomNumber(difficulty));
+    this.boxData = Array(boxCount).fill(null).map(() => ({ value: this.generateRandomNumber(difficulty), state : BoxState.Open, interaction: 0 }));
+    console.log("generateInitialValues", this.boxData);
   }
 
   /* Pass function to keypad */
@@ -45,12 +48,13 @@ export class AboutPage {
   onUpdate(val: string) : void{
     if(val === '') {
       this.endGame();
+      this.endTimer();
     }
 
-    if(parseInt(val) === this.data[this.index]) {
-      this.viewData[this.index] = "OK";
+    if(parseInt(val) === this.boxData[this.index].value) {
+      this.boxData[this.index].state = BoxState.Closed;
       this.index ++;
-      if(this.index >= this.data.length) {
+      if(this.index >= this.boxData.length) {
         this.index = 0;
       }
       this.cleanKeypad();
@@ -64,14 +68,11 @@ export class AboutPage {
   }
 
   closeGame() : void {
-    clearInterval(this.timerInterval);
+    this.endTimer();
     this.navCtrl.push(SettingsPage);
   }
 
   startGame(): void {
-    if(this.showKeypad === true) {
-      this.closeGame();
-    }
     this.showKeypad = true;
     this.hideBoxValues();
     this.startGameRound();
@@ -81,46 +82,37 @@ export class AboutPage {
     const difficulty = 5;
     let num = this.generateRandomNumber(difficulty);
     let sign = this.generateRandomNumber(2,1);
+    let box = this.boxData[this.index];
 
-    if(this.data[this.index] <= 5) {
+    if(box.value <= 5) {
       sign = 2;
     }
     if(sign === 1) {
       num = num * -1;
     }
 
-    this.viewData[this.index] = (sign === 1 ? '' : '+') + num;
-    this.data[this.index] += num;
-    console.log('startGameRound', this.data);
+    box.value += num;
+    box.interaction = num;
+    box.state = BoxState.Selected;
+
     this.startTimer();
   }
 
   hideBoxValues(): void {
-    this.data = [].concat(this.viewData);
-    this.viewData.fill(null);
+    this.boxData.forEach((box : IBox) => box.state = BoxState.Closed);
   }
 
   endGame() : void {
     this.cleanKeypad();
-    clearInterval(this.timerInterval);
-    this.viewData = this.data;
-    this.viewData[this.index] = `Game over! Should be: ${this.data[this.index]}`;
+    this.boxData.forEach((box: IBox) => box.state = BoxState.Open);
+    this.boxData[this.index].state = BoxState.Error;
   }
 
   startTimer(): void {
-    clearInterval(this.timerInterval);
-    this.timeProgress = 0;
-
-    this.timerInterval = setInterval(() => {
-      this.timeProgress += 1;
-      //console.log("pr", this.timeProgress);
-      if(this.timeProgress >= 100){
-        clearInterval(this.timerInterval);
-        this.endGame();
-      }
-
-    },10*this.timeLimit);
+    this.timerService.start();
   }
 
-
+  endTimer(): void {
+    this.timerService.end();
+  }
 }

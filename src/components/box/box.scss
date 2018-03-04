@@ -1,0 +1,23 @@
+box {
+
+  .box {
+    margin-bottom: 1px;
+    border-radius: 4px;
+  }
+
+  .box-open {
+    border: 2px solid black;
+  }
+
+  .box-closed {
+    border: 2px solid green;
+  }
+
+  .box-selected {
+    border: 2px solid blue;
+  }
+
+  .box-error {
+    border: 2px solid red;
+  }
+}

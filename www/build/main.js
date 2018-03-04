@@ -6,8 +6,8 @@ webpackJsonp([0],{
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SettingsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__about_about__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__game_game__ = __webpack_require__(99);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(15);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -29,18 +29,17 @@ var SettingsPage = (function () {
         this.nav = nav;
         this.settingsForm = formBuilder.group({
             count: ['', __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].minLength(1), __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].maxLength(30)])],
-            timeLimit: ['', __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].minLength(1)])]
+            secondsLimit: ['', __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].minLength(1)])]
         });
     }
     SettingsPage.prototype.onSubmit = function (value) {
         if (this.settingsForm.valid) {
-            this.nav.push(__WEBPACK_IMPORTED_MODULE_2__about_about__["a" /* AboutPage */], value);
+            this.nav.push(__WEBPACK_IMPORTED_MODULE_2__game_game__["a" /* GamePage */], value);
         }
-        console.log("finally");
     };
     SettingsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'settings',template:/*ion-inline-start:"D:\ionic\memory\memory\src\pages\settings\settings.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Settings</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <form [formGroup]="settingsForm" (ngSubmit)="onSubmit(settingsForm.value)">\n    <ion-item>\n      <ion-label floating>Number of boxes</ion-label>\n      <ion-input formControlName="count" type="number" value="4"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Time limit</ion-label>\n      <ion-input formControlName="timeLimit" type="number" value="10"></ion-input>\n    </ion-item>\n\n    <button ion-button full color="primary" [disabled]="!settingsForm.valid" style="margin-top: 20px;" type="submit">Save</button>\n  </form>\n</ion-content>\n'/*ion-inline-end:"D:\ionic\memory\memory\src\pages\settings\settings.html"*/
+            selector: 'settings',template:/*ion-inline-start:"D:\ionic\memory\memory\src\pages\settings\settings.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Settings</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <form [formGroup]="settingsForm" (ngSubmit)="onSubmit(settingsForm.value)">\n    <ion-item>\n      <ion-label floating>Number of boxes</ion-label>\n      <ion-input formControlName="count" type="number" value="4"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Time limit</ion-label>\n      <ion-input formControlName="secondsLimit" type="number" value="20"></ion-input>\n    </ion-item>\n\n    <button ion-button full color="primary" [disabled]="!settingsForm.valid" style="margin-top: 20px;" type="submit">Save</button>\n  </form>\n</ion-content>\n'/*ion-inline-end:"D:\ionic\memory\memory\src\pages\settings\settings.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]])
     ], SettingsPage);
@@ -91,9 +90,8 @@ webpackEmptyAsyncContext.id = 152;
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TabsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__about_about__ = __webpack_require__(99);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contact_contact__ = __webpack_require__(197);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__settings_settings__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__game_game__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__settings_settings__ = __webpack_require__(100);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -106,15 +104,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 var TabsPage = (function () {
     function TabsPage() {
-        this.tab1Root = __WEBPACK_IMPORTED_MODULE_3__settings_settings__["a" /* SettingsPage */];
-        this.tab2Root = __WEBPACK_IMPORTED_MODULE_1__about_about__["a" /* AboutPage */];
-        this.tab3Root = __WEBPACK_IMPORTED_MODULE_2__contact_contact__["a" /* ContactPage */];
+        this.tab1Root = __WEBPACK_IMPORTED_MODULE_2__settings_settings__["a" /* SettingsPage */];
+        this.tab2Root = __WEBPACK_IMPORTED_MODULE_1__game_game__["a" /* GamePage */];
     }
     TabsPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"D:\ionic\memory\memory\src\pages\tabs\tabs.html"*/'<ion-tabs>\n  <ion-tab [root]="tab1Root" tabTitle="Settings" tabIcon="home"></ion-tab>\n  <ion-tab [root]="tab2Root" tabTitle="Game" tabIcon="information-circle"></ion-tab>\n  <ion-tab [root]="tab3Root" tabTitle="Contact" tabIcon="contacts"></ion-tab>\n</ion-tabs>\n'/*ion-inline-end:"D:\ionic\memory\memory\src\pages\tabs\tabs.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"D:\ionic\memory\memory\src\pages\tabs\tabs.html"*/'<ion-tabs>\n  <ion-tab [root]="tab1Root" tabTitle="Settings" tabIcon="home"></ion-tab>\n  <ion-tab [root]="tab2Root" tabTitle="Game" tabIcon="information-circle"></ion-tab>\n</ion-tabs>\n'/*ion-inline-end:"D:\ionic\memory\memory\src\pages\tabs\tabs.html"*/
         }),
         __metadata("design:paramtypes", [])
     ], TabsPage);
@@ -129,9 +125,9 @@ var TabsPage = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContactPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return BoxState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BoxComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(33);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -142,21 +138,53 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-
-var ContactPage = (function () {
-    function ContactPage(navCtrl) {
-        this.navCtrl = navCtrl;
+var BoxState;
+(function (BoxState) {
+    BoxState[BoxState["Closed"] = 0] = "Closed";
+    BoxState[BoxState["Open"] = 1] = "Open";
+    BoxState[BoxState["Selected"] = 2] = "Selected";
+    BoxState[BoxState["Error"] = 3] = "Error";
+})(BoxState || (BoxState = {}));
+/**
+ * Generated class for the BoxComponent component.
+ *
+ * See https://angular.io/api/core/Component for more info on Angular
+ * Components.
+ */
+var BoxComponent = (function () {
+    function BoxComponent() {
     }
-    ContactPage = __decorate([
+    Object.defineProperty(BoxComponent.prototype, "value", {
+        get: function () {
+            var state = this.box.state;
+            if (state === BoxState.Selected) {
+                var interaction = this.box.interaction;
+                return interaction < 0 ? "- " + (interaction * -1) : "+ " + interaction;
+            }
+            else if (state === BoxState.Closed) {
+                return null;
+            }
+            return this.box.value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    BoxComponent.prototype.getBoxClass = function () {
+        return "box box-" + BoxState[this.box.state].toLowerCase();
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        __metadata("design:type", Object)
+    ], BoxComponent.prototype, "box", void 0);
+    BoxComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-contact',template:/*ion-inline-start:"D:\ionic\memory\memory\src\pages\contact\contact.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Contact\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <ion-list-header>Follow us on Twitter</ion-list-header>\n    <ion-item>\n      <ion-icon name="ionic" item-start></ion-icon>\n      @ionicframework\n    </ion-item>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"D:\ionic\memory\memory\src\pages\contact\contact.html"*/
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]])
-    ], ContactPage);
-    return ContactPage;
+            selector: 'box',template:/*ion-inline-start:"D:\ionic\memory\memory\src\components\box\box.html"*/'<!-- Generated template for the BoxComponent component -->\n<div [className]="getBoxClass()">\n <ion-item > {{value}} </ion-item>\n</div>\n'/*ion-inline-end:"D:\ionic\memory\memory\src\components\box\box.html"*/,
+        })
+    ], BoxComponent);
+    return BoxComponent;
 }());
 
-//# sourceMappingURL=contact.js.map
+//# sourceMappingURL=box.js.map
 
 /***/ }),
 
@@ -164,9 +192,80 @@ var ContactPage = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TimerService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+var TimerService = (function () {
+    function TimerService() {
+        // const must be READONLY but need to change Web Storm typescript compiler before that :)
+        this.END_PROGRESS = 100;
+        // Observable string sources
+        this.startSource = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["Subject"]();
+        this.endSource = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["Subject"]();
+        this.progressSource = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["Subject"]();
+        // Observable string streams
+        this.start$ = this.startSource.asObservable();
+        this.end$ = this.endSource.asObservable();
+        this.progress$ = this.progressSource.asObservable();
+    }
+    TimerService.prototype.init = function (secondsLimit) {
+        this.secondsLimit = secondsLimit;
+    };
+    TimerService.prototype.start = function () {
+        this.clearInterval();
+        this.startTimer();
+        this.startSource.next();
+    };
+    TimerService.prototype.end = function () {
+        this.clearInterval();
+        this.changeProgress(this.END_PROGRESS);
+        this.endSource.next();
+    };
+    TimerService.prototype.changeProgress = function (progress) {
+        this.progressSource.next(progress);
+    };
+    TimerService.prototype.clearInterval = function () {
+        clearInterval(this.intervalId);
+    };
+    TimerService.prototype.startTimer = function () {
+        var _this = this;
+        var progress = 0;
+        this.changeProgress(progress);
+        this.intervalId = setInterval(function () {
+            progress += 1;
+            _this.changeProgress(progress);
+            if (progress >= _this.END_PROGRESS) {
+                clearInterval(_this.intervalId);
+                _this.end();
+            }
+        }, 10 * this.secondsLimit);
+    };
+    TimerService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])()
+    ], TimerService);
+    return TimerService;
+}());
+
+//# sourceMappingURL=timerService.js.map
+
+/***/ }),
+
+/***/ 199:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(199);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(222);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(223);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -174,21 +273,21 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 222:
+/***/ 223:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(265);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_about_about__ = __webpack_require__(99);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_contact_contact__ = __webpack_require__(197);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_settings_settings__ = __webpack_require__(100);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_tabs_tabs__ = __webpack_require__(196);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_timer_timer__ = __webpack_require__(274);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_keypad_keypad__ = __webpack_require__(275);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(266);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_game_game__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_settings_settings__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_tabs_tabs__ = __webpack_require__(196);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_timer_timer__ = __webpack_require__(275);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_keypad_keypad__ = __webpack_require__(276);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_box_box__ = __webpack_require__(197);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_status_bar__ = __webpack_require__(192);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_splash_screen__ = __webpack_require__(195);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -216,12 +315,12 @@ var AppModule = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */],
-                __WEBPACK_IMPORTED_MODULE_4__pages_about_about__["a" /* AboutPage */],
-                __WEBPACK_IMPORTED_MODULE_5__pages_contact_contact__["a" /* ContactPage */],
-                __WEBPACK_IMPORTED_MODULE_6__pages_settings_settings__["a" /* SettingsPage */],
-                __WEBPACK_IMPORTED_MODULE_7__pages_tabs_tabs__["a" /* TabsPage */],
-                __WEBPACK_IMPORTED_MODULE_8__components_timer_timer__["a" /* TimerComponent */],
-                __WEBPACK_IMPORTED_MODULE_9__components_keypad_keypad__["a" /* KeypadComponent */]
+                __WEBPACK_IMPORTED_MODULE_4__pages_game_game__["a" /* GamePage */],
+                __WEBPACK_IMPORTED_MODULE_5__pages_settings_settings__["a" /* SettingsPage */],
+                __WEBPACK_IMPORTED_MODULE_6__pages_tabs_tabs__["a" /* TabsPage */],
+                __WEBPACK_IMPORTED_MODULE_7__components_timer_timer__["a" /* TimerComponent */],
+                __WEBPACK_IMPORTED_MODULE_8__components_keypad_keypad__["a" /* KeypadComponent */],
+                __WEBPACK_IMPORTED_MODULE_9__components_box_box__["a" /* BoxComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["a" /* BrowserModule */],
@@ -232,10 +331,9 @@ var AppModule = (function () {
             bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* IonicApp */]],
             entryComponents: [
                 __WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */],
-                __WEBPACK_IMPORTED_MODULE_4__pages_about_about__["a" /* AboutPage */],
-                __WEBPACK_IMPORTED_MODULE_5__pages_contact_contact__["a" /* ContactPage */],
-                __WEBPACK_IMPORTED_MODULE_6__pages_settings_settings__["a" /* SettingsPage */],
-                __WEBPACK_IMPORTED_MODULE_7__pages_tabs_tabs__["a" /* TabsPage */]
+                __WEBPACK_IMPORTED_MODULE_4__pages_game_game__["a" /* GamePage */],
+                __WEBPACK_IMPORTED_MODULE_5__pages_settings_settings__["a" /* SettingsPage */],
+                __WEBPACK_IMPORTED_MODULE_6__pages_tabs_tabs__["a" /* TabsPage */]
             ],
             providers: [
                 __WEBPACK_IMPORTED_MODULE_10__ionic_native_status_bar__["a" /* StatusBar */],
@@ -251,13 +349,13 @@ var AppModule = (function () {
 
 /***/ }),
 
-/***/ 265:
+/***/ 266:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(192);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(195);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_tabs_tabs__ = __webpack_require__(196);
@@ -297,12 +395,13 @@ var MyApp = (function () {
 
 /***/ }),
 
-/***/ 274:
+/***/ 275:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TimerComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_timerService__ = __webpack_require__(198);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -313,6 +412,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 /**
  * Generated class for the TimerComponent component.
  *
@@ -320,19 +420,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Components.
  */
 var TimerComponent = (function () {
-    function TimerComponent() {
-        console.log('Hello TimerComponent Component');
-        this.text = 'Hello World';
+    function TimerComponent(timerService) {
+        var _this = this;
+        this.timerService = timerService;
+        this.progress = 0;
+        this.subscription = timerService.progress$.subscribe(function (progress) {
+            _this.progress = progress;
+        });
     }
-    __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])('progress'),
-        __metadata("design:type", Object)
-    ], TimerComponent.prototype, "progress", void 0);
+    TimerComponent.prototype.ngOnDestroy = function () {
+        this.subscription.unsubscribe();
+    };
     TimerComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'timer',template:/*ion-inline-start:"D:\ionic\memory\memory\src\components\timer\timer.html"*/'<div class="progress-outer">\n  <div class="progress-inner" [style.width]="progress + \'%\'">\n    {{progress}}%\n  </div>\n</div>'/*ion-inline-end:"D:\ionic\memory\memory\src\components\timer\timer.html"*/
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_timerService__["a" /* TimerService */]])
     ], TimerComponent);
     return TimerComponent;
 }());
@@ -341,13 +444,13 @@ var TimerComponent = (function () {
 
 /***/ }),
 
-/***/ 275:
+/***/ 276:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return KeypadComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -442,12 +545,14 @@ var KeypadComponent = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AboutPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GamePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__settings_settings__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_box_box__ = __webpack_require__(197);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_timerService__ = __webpack_require__(198);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -461,37 +566,45 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var AboutPage = (function () {
-    function AboutPage(navCtrl, navParams) {
+
+
+var GamePage = (function () {
+    function GamePage(navCtrl, navParams, timerService) {
+        var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.timerService = timerService;
         this.onCleanKeypad = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["Subject"]();
         this.score = 0;
         this.index = 0;
         this.showKeypad = false;
-        this.timeLimit = parseInt(navParams.data.timeLimit);
         this.generateInitialValues(parseInt(navParams.data.count));
+        // timer service
+        this.timerService.init(parseInt(navParams.data.secondsLimit));
+        this.timerService.end$.subscribe(function () { return _this.endGame(); });
     }
-    AboutPage.prototype.generateInitialValues = function (boxCount) {
+    GamePage.prototype.generateInitialValues = function (boxCount) {
         var _this = this;
         var difficulty = 20;
-        this.viewData = Array(boxCount).fill(1).map(function () { return _this.generateRandomNumber(difficulty); });
+        this.boxData = Array(boxCount).fill(null).map(function () { return ({ value: _this.generateRandomNumber(difficulty), state: __WEBPACK_IMPORTED_MODULE_4__components_box_box__["b" /* BoxState */].Open, interaction: 0 }); });
+        console.log("generateInitialValues", this.boxData);
     };
-    AboutPage.prototype.ngOnInit = function () {
+    GamePage.prototype.ngOnInit = function () {
         this.onUpdateBound = this.onUpdate.bind(this);
     };
-    AboutPage.prototype.generateRandomNumber = function (to, from) {
+    GamePage.prototype.generateRandomNumber = function (to, from) {
         if (from === void 0) { from = 1; }
         return Math.floor(Math.random() * to) + from;
     };
-    AboutPage.prototype.onUpdate = function (val) {
+    GamePage.prototype.onUpdate = function (val) {
         if (val === '') {
             this.endGame();
+            this.endTimer();
         }
-        if (parseInt(val) === this.data[this.index]) {
-            this.viewData[this.index] = "OK";
+        if (parseInt(val) === this.boxData[this.index].value) {
+            this.boxData[this.index].state = __WEBPACK_IMPORTED_MODULE_4__components_box_box__["b" /* BoxState */].Closed;
             this.index++;
-            if (this.index >= this.data.length) {
+            if (this.index >= this.boxData.length) {
                 this.index = 0;
             }
             this.cleanKeypad();
@@ -499,72 +612,62 @@ var AboutPage = (function () {
             this.startGameRound();
         }
     };
-    AboutPage.prototype.cleanKeypad = function () {
+    GamePage.prototype.cleanKeypad = function () {
         this.onCleanKeypad.next("Success");
     };
-    AboutPage.prototype.closeGame = function () {
-        clearInterval(this.timerInterval);
+    GamePage.prototype.closeGame = function () {
+        this.endTimer();
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__settings_settings__["a" /* SettingsPage */]);
     };
-    AboutPage.prototype.startGame = function () {
-        if (this.showKeypad === true) {
-            this.closeGame();
-        }
+    GamePage.prototype.startGame = function () {
         this.showKeypad = true;
         this.hideBoxValues();
         this.startGameRound();
     };
-    AboutPage.prototype.startGameRound = function () {
+    GamePage.prototype.startGameRound = function () {
         var difficulty = 5;
         var num = this.generateRandomNumber(difficulty);
         var sign = this.generateRandomNumber(2, 1);
-        if (this.data[this.index] <= 5) {
+        var box = this.boxData[this.index];
+        if (box.value <= 5) {
             sign = 2;
         }
         if (sign === 1) {
             num = num * -1;
         }
-        this.viewData[this.index] = (sign === 1 ? '' : '+') + num;
-        this.data[this.index] += num;
-        console.log('startGameRound', this.data);
+        box.value += num;
+        box.interaction = num;
+        box.state = __WEBPACK_IMPORTED_MODULE_4__components_box_box__["b" /* BoxState */].Selected;
         this.startTimer();
     };
-    AboutPage.prototype.hideBoxValues = function () {
-        this.data = [].concat(this.viewData);
-        this.viewData.fill(null);
+    GamePage.prototype.hideBoxValues = function () {
+        this.boxData.forEach(function (box) { return box.state = __WEBPACK_IMPORTED_MODULE_4__components_box_box__["b" /* BoxState */].Closed; });
     };
-    AboutPage.prototype.endGame = function () {
+    GamePage.prototype.endGame = function () {
         this.cleanKeypad();
-        clearInterval(this.timerInterval);
-        this.viewData = this.data;
-        this.viewData[this.index] = "Game over! Should be: " + this.data[this.index];
+        this.boxData.forEach(function (box) { return box.state = __WEBPACK_IMPORTED_MODULE_4__components_box_box__["b" /* BoxState */].Open; });
+        this.boxData[this.index].state = __WEBPACK_IMPORTED_MODULE_4__components_box_box__["b" /* BoxState */].Error;
     };
-    AboutPage.prototype.startTimer = function () {
-        var _this = this;
-        clearInterval(this.timerInterval);
-        this.timeProgress = 0;
-        this.timerInterval = setInterval(function () {
-            _this.timeProgress += 1;
-            //console.log("pr", this.timeProgress);
-            if (_this.timeProgress >= 100) {
-                clearInterval(_this.timerInterval);
-                _this.endGame();
-            }
-        }, 10 * this.timeLimit);
+    GamePage.prototype.startTimer = function () {
+        this.timerService.start();
     };
-    AboutPage = __decorate([
+    GamePage.prototype.endTimer = function () {
+        this.timerService.end();
+    };
+    GamePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-about',template:/*ion-inline-start:"D:\ionic\memory\memory\src\pages\about\about.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Game\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <timer [progress]="timeProgress"></timer>\n  <ion-item>Score: {{score}}</ion-item>\n  <ion-toolbar>\n    <button start (click)="startGame()" [style.visibility]="showKeypad ? \'hidden\' : \'visible\'" ion-button solid>Start</button>\n    <button end (click)="closeGame()" [style.visibility]="showKeypad ? \'visible\' : \'hidden\'" ion-button solid>Close</button>\n  </ion-toolbar>\n  <ion-item *ngFor="let i of viewData">\n    {{i}}\n  </ion-item>\n  <keypad [onUpdate]="onUpdateBound" [onClean]="onCleanKeypad" [style.visibility]="showKeypad ? \'visible\' : \'hidden\'"></keypad>\n</ion-content>\n'/*ion-inline-end:"D:\ionic\memory\memory\src\pages\about\about.html"*/
+            selector: 'page-game',template:/*ion-inline-start:"D:\ionic\memory\memory\src\pages\game\game.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Game\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <timer></timer>\n  <ion-item>Score: {{score}}</ion-item>\n  <ion-toolbar>\n    <button *ngIf="!showKeypad; else elseBlock" start (click)="startGame()" ion-button solid>Start</button>\n    <ng-template #elseBlock><button end (click)="closeGame()" ion-button solid>Close</button></ng-template>\n  </ion-toolbar>\n  <ion-list>\n    <box *ngFor="let box of boxData" [box]="box"></box>\n  </ion-list>\n  <keypad [onUpdate]="onUpdateBound" [onClean]="onCleanKeypad" [style.visibility]="showKeypad ? \'visible\' : \'hidden\'"></keypad>\n</ion-content>\n'/*ion-inline-end:"D:\ionic\memory\memory\src\pages\game\game.html"*/,
+            providers: [__WEBPACK_IMPORTED_MODULE_5__services_timerService__["a" /* TimerService */]]
             /*directives: [TimerComponent]*/ // Directives was REMOVED !!!
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavParams */]])
-    ], AboutPage);
-    return AboutPage;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavParams */], __WEBPACK_IMPORTED_MODULE_5__services_timerService__["a" /* TimerService */]])
+    ], GamePage);
+    return GamePage;
 }());
 
-//# sourceMappingURL=about.js.map
+//# sourceMappingURL=game.js.map
 
 /***/ })
 
-},[198]);
+},[199]);
 //# sourceMappingURL=main.js.map

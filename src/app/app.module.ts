@@ -3,13 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
+import { GamePage } from '../pages/game/game';
 import { SettingsPage } from '../pages/settings/settings';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { TimerComponent } from '../components/timer/timer'
 import { KeypadComponent } from '../components/keypad/keypad'
+import { BoxComponent } from '../components/box/box'
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -17,12 +17,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 @NgModule({
   declarations: [
     MyApp,
-    AboutPage,
-    ContactPage,
+    GamePage,
     SettingsPage,
     TabsPage,
     TimerComponent,
-    KeypadComponent
+    KeypadComponent,
+    BoxComponent
   ],
   imports: [
     BrowserModule,
@@ -31,8 +31,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AboutPage,
-    ContactPage,
+    GamePage,
     SettingsPage,
     TabsPage
   ],

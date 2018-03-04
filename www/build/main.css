@@ -25678,6 +25678,27 @@ ion-navbar.toolbar {
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
 
+box .box {
+  margin-bottom: 1px;
+  border-radius: 4px;
+}
+
+box .box-open {
+  border: 2px solid black;
+}
+
+box .box-closed {
+  border: 2px solid green;
+}
+
+box .box-selected {
+  border: 2px solid blue;
+}
+
+box .box-error {
+  border: 2px solid red;
+}
+
 keypad .btn {
   padding: 3rem;
 }

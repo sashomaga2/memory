@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 
 enum Command {
@@ -16,7 +16,7 @@ enum Command {
   selector: 'keypad',
   templateUrl: 'keypad.html'
 })
-export class KeypadComponent {
+export class KeypadComponent implements OnInit, OnDestroy{
 
   public value: string = "";
 
@@ -65,7 +65,7 @@ export class KeypadComponent {
     return true
   }
 
-  handleCommand(val: String) : boolean {
+  handleCommand(val: Command) : boolean {
     if(val === Command.Clear) {
       this.value = "0";
       return false;

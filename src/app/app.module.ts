@@ -1,4 +1,4 @@
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule, ErrorHandler, Injectable } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
@@ -13,6 +13,10 @@ import { BoxComponent } from '../components/box/box'
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+
+import { GamePlayServiceFactory, GameplayService } from '../services/gameplayService';
+import { SettingsService } from '../services/settingsService';
+import { NavController, NavParams } from 'ionic-angular';
 
 @NgModule({
   declarations: [
@@ -38,7 +42,15 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    SettingsService,
+    // game play service factory
+    {
+      provide: "IGameplayService",
+      useFactory: GamePlayServiceFactory,
+      deps: [SettingsService],
+      multi: true
+    }
   ]
 })
 export class AppModule {}

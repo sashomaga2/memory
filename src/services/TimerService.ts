@@ -7,8 +7,8 @@ export class TimerService {
   private intervalId : number;
   private secondsLimit: number;
   private progress: number;
-  // const must be READONLY but need to change Web Storm typescript compiler before that :)
-  private END_PROGRESS = 100;
+  
+  readonly END_PROGRESS = 100;
 
   // Observable string sources
   private startSource = new Subject<any>();

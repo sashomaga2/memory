@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, Injector } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { NavController, NavParams } from 'ionic-angular';
-import { TimerComponent } from '../../components/timer/timer'
 import { SettingsPage } from '../settings/settings';
 import { IBox, BoxState } from '../../components/box/box';
 import { TimerService } from '../../services/timerService';
+//import { GameplayService } from '../../services/gameplayService';
+import { GamePlayServiceFactory, IGameplayService } from '../../services/gameplayService';
 
 @Component({
   selector: 'page-game',
   templateUrl: 'game.html',
-  providers: [TimerService]
+  providers: [TimerService /*, GameplayService*/]
   /*directives: [TimerComponent]*/ // Directives was REMOVED !!!
 })
 export class GamePage implements OnInit {
@@ -19,13 +20,20 @@ export class GamePage implements OnInit {
   index: number = 0;
   showKeypad: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private timerService: TimerService) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private timerService: TimerService,
+    @Inject('IGameplayService') private gamePlayService: IGameplayService
+    //injector: Injector
+  ) {
+    //injector.get('IGameplayService', 'test');
     this.generateInitialValues(parseInt(navParams.data.count));
     // timer service
     this.timerService.init(parseInt(navParams.data.secondsLimit));
     this.timerService.end$.subscribe(
       () => this.endGame()
-    )
+    );
   }
 
   generateInitialValues(boxCount: number) : void {
@@ -82,7 +90,7 @@ export class GamePage implements OnInit {
     const difficulty = 5;
     let num = this.generateRandomNumber(difficulty);
     let sign = this.generateRandomNumber(2,1);
-    let box = this.boxData[this.index];
+    const box = this.boxData[this.index];
 
     if(box.value <= 5) {
       sign = 2;
